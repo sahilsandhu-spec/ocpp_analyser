@@ -22,7 +22,7 @@ from .models import AnalysisResult, ChargingSession, FaultEvent, MessageType, OC
 from .parser import OCPPLogParser
 from .reporter import OCPPReporter
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 __author__  = "Sahil Sandhu"
 __email__   = "sahilsandhu@alumni.iitm.ac.in"
 __license__ = "MIT"

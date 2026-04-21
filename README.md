@@ -27,6 +27,7 @@ OCPPReporter().to_html(result, "report.html")
 - **Charger identity** — reads vendor, model, serial number, and firmware version from `BootNotification`
 - **HTML report** — self-contained dark-theme report you can open in any browser
 - **CSV export** — sessions and faults as comma-separated values
+- **JSON export** — machine-friendly structured output for pipelines and dashboards
 - **CLI tool** — analyze logs directly from the terminal
 - **Zero dependencies** — pure Python standard library
 
@@ -87,8 +88,11 @@ ocpp-lens charger.log
 # Export HTML + CSV reports
 ocpp-lens charger.log --html report.html --csv sessions.csv
 
+# Export JSON report
+ocpp-lens charger.log --json report.json
+
 # Quiet mode (no terminal output)
-ocpp-lens charger.log --html report.html --quiet
+ocpp-lens charger.log --html report.html --json report.json --quiet
 ```
 
 ---

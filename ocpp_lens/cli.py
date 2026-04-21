@@ -4,6 +4,7 @@ ocpp-lens command-line interface.
 Usage:
     ocpp-lens charger.log
     ocpp-lens charger.log --html report.html --csv report.csv
+    ocpp-lens charger.log --json report.json
     ocpp-lens charger.log --sessions-only
     ocpp-lens charger.log --faults-only
 """
@@ -84,6 +85,7 @@ def main(argv=None) -> None:
 examples:
   ocpp-lens charger.log
   ocpp-lens charger.log --html report.html --csv sessions.csv
+    ocpp-lens charger.log --json report.json
   ocpp-lens charger.log --faults-only
         """,
     )
@@ -101,6 +103,11 @@ examples:
         "--csv",
         metavar="FILE",
         help="Save a CSV report to FILE.",
+    )
+    parser.add_argument(
+        "--json",
+        metavar="FILE",
+        help="Save a JSON report to FILE.",
     )
     parser.add_argument(
         "--sessions-only",
@@ -153,8 +160,13 @@ examples:
         if not args.quiet:
             print(f"✓ CSV report  → {args.csv}")
 
-    if not args.html and not args.csv and not args.quiet:
-        print("Tip: use --html report.html or --csv report.csv to export reports.")
+    if args.json:
+        reporter.to_json(result, args.json)
+        if not args.quiet:
+            print(f"✓ JSON report → {args.json}")
+
+    if not args.html and not args.csv and not args.json and not args.quiet:
+        print("Tip: use --html report.html, --csv report.csv, or --json report.json to export reports.")
 
 
 if __name__ == "__main__":

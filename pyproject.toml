@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "ocpp-lens"
-version = "0.1.0"
+version = "0.2.0"
 description = "Parse and analyze OCPP 1.6 EV charger log files — sessions, faults, and reports."
 readme = "README.md"
 requires-python = ">=3.8"

@@ -274,6 +274,15 @@ class TestOCPPReporter:
         assert "ocpp-lens" in html.lower() or "OCPP" in html
         assert "<table>" in html
 
+    def test_to_json_returns_string(self, sample_result):
+        reporter = OCPPReporter()
+        json_str = reporter.to_json(sample_result)
+        assert isinstance(json_str, str)
+        data = json.loads(json_str)
+        assert "summary" in data
+        assert "sessions" in data
+        assert data["summary"]["total_sessions"] == sample_result.total_sessions
+
     def test_html_contains_charger_info(self, sample_result):
         html = OCPPReporter().to_html(sample_result)
         assert "Exicom" in html
@@ -294,5 +303,12 @@ class TestOCPPReporter:
         out = tmp_path / "report.html"
         reporter = OCPPReporter()
         reporter.to_html(sample_result, str(out))
+        assert out.exists()
+        assert out.stat().st_size > 0
+
+    def test_to_json_file_write(self, sample_result, tmp_path):
+        out = tmp_path / "report.json"
+        reporter = OCPPReporter()
+        reporter.to_json(sample_result, str(out))
         assert out.exists()
         assert out.stat().st_size > 0
